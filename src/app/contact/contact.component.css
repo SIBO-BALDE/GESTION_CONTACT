@@ -1,0 +1,132 @@
+form input, textarea {
+    border: none;
+    border-bottom: 1px solid rgb(163, 156, 156);
+    border-radius: 0px;
+}
+
+.champObligatoire{
+    color: #F9968B;
+}
+
+button{
+    border: none;
+    background-color: #4aa3a2;
+    color: white;
+    font-weight: bold;
+    border-bottom-left-radius: 2vh;
+    border-top-right-radius: 2vh;
+    padding: 2vh;
+}
+
+
+button:hover{
+    background-color: #F9968B;
+    color: white;
+    transition: 1s;
+    scale: 1.1;
+}
+
+
+.modal-footer button{
+    padding: 1vh 2vh;
+}
+
+.modal-footer .btn-annuler, .btn-supprimer, .notactive  {
+    background-color:#F9968B;
+}
+.modal-footer .btn-annuler:hover, .notactive :hover{
+    background-color:#4aa3a2;
+}
+
+.active {
+    background-color:#4aa3a2;
+    color: white;
+}
+.active:hover {
+    background-color:#F9968B;
+    color: white;
+}
+
+.deseable{
+    background-color:#F9968B;
+    color: white;
+}
+.deseable:hover{
+    background-color:#4aa3a2;
+    color: white;
+}
+
+
+.contact-list{
+    border-radius: 5vh;
+}
+
+/* Les cercles sur la carte  */
+.circle-start{
+    width: 20%;
+    height: 20vh;
+    border-radius: 5vh 0 100% 0 ;
+}
+
+.circle-active{
+    background-color: #f9968b;
+}
+
+.circle-end{
+    display: flex;
+    justify-content: space-between;
+}
+
+.end {
+    width: 15%;
+    height: 15vh;
+    height: 15vh;
+    border-radius: 100% 0 5vh 0;
+    position: relative;
+    margin-bottom: -0.2vh;
+}
+
+.circle-deseable{
+    background-color: #4aa3a2;
+}
+
+.card{
+    border-radius: 5vh;
+    border: 1px solid #4aa3a2;
+}
+.contact-item{
+    margin: -18vh 0 -13vh 0;
+    padding: 0 15% 0 22%;
+    /* border-radius: 5vh;  */
+}
+
+.contact-item img{
+    width: 100%;
+    height: 40vh;
+    border-radius: 4vh;
+    margin: 2vh 0;
+}
+
+/* Pagination  */
+/* Debut pagignation */
+
+.page-container{
+    margin-top: -5vh;
+    margin-bottom: 5vh;
+}
+
+.page-container .page{
+    background-color: #F6F6F6;
+    padding: 1vh 2vh;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 2vh;
+    color: #F9968B;
+    text-align: center; 
+}
+
+.page-container .page-active{
+    background-color: #F9968B;
+    color: white;
+}
+/* Fin pagignation */

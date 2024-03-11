@@ -1,0 +1,192 @@
+<!-- formulaire de connexion -->
+<div class="container">
+  <div class="container-formulaire p-5">
+    <div class="card">
+      <div class="row g-0">
+        <div class="col-md-6 image-section">
+          <!-- <img src="assets/background.png" class="img-fluid rounded-start" alt="..."> -->
+        </div>
+
+        <div class="col-md-6">
+          <div class="card-body p-0 ">
+
+            <!-- Connexion  -->
+            <div class="login" *ngIf="choice">
+              <div class="register-login text-end px-5">
+                <button class="me-3 py-2 px-3 active">Connexion</button>
+                <button class="py-2 px-3 btnlogin"  (click)="formChoice()">Inscription</button>
+              </div>
+  
+              <div class="connexion container container-connexion px-5 pt-2 pb-5">
+                <div class="text-center mb-4">
+                  <img src="assets/logo1.jpeg" alt="">
+                </div>
+                <h3 class="mb-4">Connectez vous </h3>
+                <form>
+                  <div class="mb-4">
+                    <label for="exampleInputEmail1" class="form-label fw-bold">Adresse email <span class="champObligatoire">*</span></label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Votre adresse email" [(ngModel)]="email">
+                  </div>
+                  <div class="mb-4">
+                    <label for="exampleInputPassword1" class="form-label fw-bold">Mot de passe <span class="champObligatoire">*</span></label>
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Votre mot de passe" [(ngModel)]="password">
+                  </div>
+                  <button type="submit" class="btn btn-connexion" (click)="login()">Se connecter</button>
+                  
+                </form>
+              </div>
+            </div>
+            <!-- Fin connexion  -->
+
+            <!-- Inscription  -->
+            <div class="register" *ngIf="!choice">
+              <div class="register-login text-end px-5">
+                <button class="me-3 py-2 px-3" (click)="formChoice()">Connexion</button>
+                <button class="py-2 px-3 btnlogin active">Inscription</button>
+              </div>
+  
+              <div class="connexion container container-connexion px-5 pt-2 pb-5">
+                <div class="text-center mb-4">
+                  <img src="assets/logo1.jpeg" alt="">
+                </div>
+                <h3 class="mb-4">Veuillez vous inscrire </h3>
+                <form>
+                  <div class="mb-3">
+                    <label for="inputName" class="form-label fw-bold">Nom  <span class="champObligatoire">*</span></label>
+                    <input type="text" name="nom" class="form-control" id="inputName" placeholder="Votre nom" [(ngModel)]="nom">
+                  </div>
+          
+                  <div class="mb-3">
+                    <label for="inputSurname" class="form-label fw-bold">Prénom <span class="champObligatoire">*</span></label>
+                    <input type="text" name="prenom" class="form-control" id="inputSurname" placeholder="Votre prénom" [(ngModel)]="prenom">
+                  </div>
+          
+                  <div class="mb-3">
+                    <label for="inputEmail" class="form-label fw-bold">Adresse email <span class="champObligatoire">*</span></label>
+                    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Votre adresse email" [(ngModel)]="email">
+                  </div>
+          
+                  <div class="mb-3">
+                      <label for="inputPhone" class="form-label fw-bold">Téléphone <span class="champObligatoire">*</span></label>
+                      <input type="tel" name="number" class="form-control" id="inputPhone" placeholder="Votre numéro de téléphone" [(ngModel)]="telephone">
+                  </div>
+          
+                  <div class="mb-3">
+                    <label for="inputPasswrd" class="form-label fw-bold">Mot de passe <span class="champObligatoire">*</span></label>
+                    <input type="password" name="password" class="form-control" id="inputPasswrd" placeholder="Votre mot de passe" [(ngModel)]="password">
+                  </div>
+          
+                  <div class="mb-3">
+                    <label for="inputPasswordConf" class="form-label fw-bold">Confirmer Mot de passe <span class="champObligatoire">*</span></label>
+                    <input type="password" name="passwordConf" class="form-control" id="inputPasswordConf" placeholder="Confirmer votre mot de passe" [(ngModel)]="passwordConf">
+                  </div>
+          
+                  <div class="mb-3">
+                    <label for="imageUrl" class="form-label fw-bold">Choisir une image <span class="champfacultatif">(facultatif)</span></label>
+                    <input type="text" name="imageUrl" class="form-control" id="imageUrl" placeholder="Donner une url valide" [(ngModel)]="photoURL">
+                  </div>
+
+                  <!-- <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Choisir une image <span class="champfacultatif">(facultatif)</span></label>
+                    <input class="form-control" type="file" id="formFile" name="imageFile" accept="image/*" (change)="uploadFile($event)">
+                  </div> -->
+                  <button type="submit" class="btn btn-connexion" (click)="register()">S'inscrire</button>
+                </form>
+              </div>
+            </div>
+            <!-- Fin Inscription  -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- <div class="connexion">
+    <form>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" name="email" class="form-control" id="exampleInputEmail1" [(ngModel)]="email">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="password">
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="login(email,password)">Submit</button>
+        <div class="d-block">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Mot de passe oublié</a>
+            <a href="#">Vous n'avez pas de compte ? S'inscrire</a>
+        </div>
+    </form>
+</div> -->
+<!-- fin formulaire de connexion -->
+
+<!-- formulaire d'inscription -->
+<!-- <div class="inscription mt-5 shadow container">
+    <h1 class="text-center my-5">Veuillez vous inscrire</h1>
+    <form>
+        <div class="mb-3">
+          <label for="inputName" class="form-label">Nom</label>
+          <input type="text" name="nom" class="form-control" id="inputName" [(ngModel)]="nom">
+        </div>
+
+        <div class="mb-3">
+          <label for="inputSurname" class="form-label">Prénom</label>
+          <input type="text" name="prenom" class="form-control" id="inputSurname" [(ngModel)]="prenom">
+        </div>
+
+        <div class="mb-3">
+          <label for="inputEmail" class="form-label">Adresse email</label>
+          <input type="email" name="email" class="form-control" id="inputEmail" [(ngModel)]="email">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputPhone" class="form-label">Téléphone</label>
+            <input type="tel" name="number" class="form-control" id="inputPhone" [(ngModel)]="telephone">
+        </div>
+
+        <div class="mb-3">
+          <label for="inputPasswrd" class="form-label">Mot de passe</label>
+          <input type="password" name="password" class="form-control" id="inputPasswrd" [(ngModel)]="password">
+        </div>
+
+        <div class="mb-3">
+          <label for="inputPasswordConf" class="form-label">Confirmer Mot de passe</label>
+          <input type="password" name="passwordConf" class="form-control" id="inputPasswordConf" [(ngModel)]="passwordConf">
+        </div>
+
+        <div class="mb-3">
+          <label for="formFile" class="form-label">Choisir une image</label>
+          <input class="form-control" type="file" id="formFile" name="imageFile" accept="image/*" (change)="uploadFile($event)">
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="register()">Submit</button>
+    </form>
+</div> -->
+<!-- fin formulaire d'inscription -->
+
+<!-- Modal mot de passe oublié  -->
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Mot de passe oublier ?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- Fin modal mot de passe oublié  -->

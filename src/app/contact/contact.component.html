@@ -1,0 +1,236 @@
+<app-header></app-header>
+<div class="container">
+    <!-- Modal mot de passe oublié  -->
+    <!-- Button trigger modal -->
+    <div *ngIf="choice">
+        <h1 class="fw-bold text-center mb-5">Liste des contacts de {{userFound.prenom}} {{userFound.nom}}</h1>
+        <div class="d-flex justify-content-between mb-5">
+            <div class="col-md-6">
+                <button type="button" class="btn active" data-bs-toggle="modal" data-bs-target="#modalAjoutContact">Ajouter un contact</button>
+                <button type="button" class="btn btn-corbeille notactive ms-3" (click)="listChoice()">Voir corbeille </button>
+            </div>
+    
+            <div class="input-group">
+                <input type="text" name="filterValue" class="form-control" [(ngModel)]="filterValue" (input)="onSearch()">
+                <button class="input-group-text notactive"><i class="bi bi-search"></i></button>
+            </div>
+    
+        </div>
+    
+        <!-- La liste des contacts  -->
+        <div class="list-contact" *ngFor="let contactUserFound of filteredElement ">
+            <div *ngIf="contactUserFound.etatContact == 1">
+                <div class="card mb-5 shadow-sm ">
+                    <div class="circle-start circle-active "></div>
+                    <div class="card-body contact-item">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <img src="{{contactUserFound.photoContact}}" class="img-fluid" alt="...">
+                                
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-grid gap-2 d-md-block text-end btns mt-3">
+                                    <button type="button" class="btn btn-modifier me-3" data-bs-toggle="modal" data-bs-target="#modalModifierContact" (click)="chargeInfoModif(contactUserFound)">modifier</button>
+                                    <button class="btn btn-supprimer " type="button" (click)="supprimer(contactUserFound.idContact)">supprimer</button>
+                                </div>
+                                <h5 class="card-title fw-bold my-3">{{contactUserFound.nomContact}} {{contactUserFound.prenomContact}}</h5>
+                                <p class="card-text"><span class="fw-bold">Téléphone:</span> {{contactUserFound.telephoneContact}}</p>
+                                <p class="card-text"><span class="fw-bold">Email:</span> {{contactUserFound.emailContact}}</p>
+                                <p class="card-text"><span class="fw-bold">Description:</span> {{contactUserFound.descriptionContact}}</p>
+                                <p class="card-text" *ngIf="contactUserFound.updatedAt !=''"><span class="fw-bold">Dernière modification:</span> {{contactUserFound.updatedAt | date:"dd/MM/yyyy 'à' hh:mm a"}}</p>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="circle-end ">
+                        <p></p>
+                        <p class="end circle-deseable"></p>
+                    </div>
+                </div>
+            </div>  
+        </div>
+
+        <!-- Pagination  -->
+        <!-- <div class="page-container mt-5 text-end">
+            <span class="page page-active">1</span>
+            <span class="page">2</span>
+            <span class="page">3</span>
+            <span class="page"><i class="bi bi-chevron-right "></i></span>
+        </div> -->
+    </div>
+    
+    <!-- Fin liste des contacts  -->
+
+    <!-- Liste des contacts supprimés  -->
+    <div *ngIf="!choice">
+        <h1 class="fw-bold text-center mb-5">Liste des contacts supprimer de {{userFound.prenom}} {{userFound.nom}}</h1>
+        <div class="d-flex justify-content-between mb-5">
+            <div class="col-md-6">
+                <button type="button" class="btn notactive " (click)="listChoice()">Liste contact</button>
+                <button type="button" class="btn btn-corbeille active  ms-3" (click)="viderCorbeille()"  >Vider la corbeille </button>
+            </div>
+    
+            <div class="input-group">
+                <input type="text" name="filterValue" class="form-control" [(ngModel)]="filterValue" (input)="onSearch()">
+                <button class="input-group-text notactive"><i class="bi bi-search"></i></button>
+            </div>
+    
+        </div>
+    
+        <!-- La liste des contacts  de la corbeille -->
+        <div class="list-contact" *ngFor="let contactUserFound of filteredElement ">
+            <div *ngIf="contactUserFound.etatContact == 0">
+                <div class="card mb-5 shadow ">
+                    <div class="circle-start active"></div>
+                    <div class="card-body contact-item">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <img src="{{contactUserFound.photoContact}}" class="" alt="...">
+                                
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-grid gap-2 d-md-block text-center mt-3">
+                                    <button class="btn notactive me-3" (click)="suppressionDefinitive(contactUserFound.idContact)">supprimer définitivement</button>
+                                    <button class="btn active"(click)="restaurer(contactUserFound.idContact)">restaurer</button>
+                                </div>
+                                <h5 class="card-title fw-bold my-3">{{contactUserFound.nomContact}} {{contactUserFound.prenomContact}}</h5>
+                                <p class="card-text"><span class="fw-bold">Téléphone:</span> {{contactUserFound.telephoneContact}}</p>
+                                <p class="card-text"><span class="fw-bold">Email:</span> {{contactUserFound.emailContact}}</p>
+                                <p class="card-text"><span class="fw-bold">Description:</span> {{contactUserFound.descriptionContact}}</p>
+                                <p class="card-text" *ngIf="contactUserFound.updatedAt !=''"><span class="fw-bold">Dernière modification:</span> {{contactUserFound.updatedAt | date:"dd/MM/yyyy 'à' hh:mm a"}}</p>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="circle-end">
+                        <p></p>
+                        <p class="end notactive"></p>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+
+        <!-- Pagination  -->
+        <!-- <div class="page-container mt-5 text-end">
+            <span class="page page-active">1</span>
+            <span class="page">2</span>
+            <span class="page">3</span>
+            <span class="page"><i class="fa-solid fa-chevron-right"></i></span>
+        </div> -->
+    </div>
+    <!-- Fin liste des contacts supprimés  -->
+    <div>
+
+    </div>
+</div>
+
+
+<!-- Modal ajouter un contact -->
+<div class="modal fade" id="modalAjoutContact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="mb-4">
+                  <label for="inputName" class="form-label fw-bold">Nom  <span class="champObligatoire">*</span></label>
+                  <input type="text" name="nom" class="form-control" id="inputName" placeholder="Votre nom..." [(ngModel)]="nom">
+                </div>
+        
+                <div class="mb-4">
+                  <label for="inputSurname" class="form-label fw-bold">Prénom <span class="champObligatoire">*</span></label>
+                  <input type="text" name="prenom" class="form-control" id="inputSurname" placeholder="Votre prénom..." [(ngModel)]="prenom">
+                </div>
+        
+                <div class="mb-4">
+                  <label for="inputEmail" class="form-label fw-bold">Adresse email <span class="champObligatoire">*</span></label>
+                  <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Votre adresse email..." [(ngModel)]="email">
+                </div>
+        
+                <div class="mb-4">
+                    <label for="inputPhone" class="form-label fw-bold">Téléphone <span class="champObligatoire">*</span></label>
+                    <input type="tel" name="number" class="form-control" id="inputPhone" placeholder="Votre numéro de téléphone..." [(ngModel)]="telephone">
+                </div>
+
+                <div class="mb-4">
+                    <label for="inputPhotoUrl" class="form-label fw-bold">Adresse de l'image <span class="champObligatoire">*</span></label>
+                    <input type="text" name="photoURL" class="form-control" id="inputPhotoUrl" placeholder="L'adresse valide de l'image..." [(ngModel)]="photoURL">
+                </div>
+        
+                <!-- <div class="mb-4">
+                  <label for="formFile" class="form-label fw-bold">Choisir une image <span class="champObligatoire">*</span></label>
+                  <input class="form-control" type="file" id="formFile" name="imageFile" accept="image/*" (change)="uploadFile($event)">
+                </div> -->
+
+                <div class="mb-4">
+                    <label for="exampleFormControlTextarea1" class="form-label fw-bold">Description  <span class="champObligatoire">*</span></label>
+                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" placeholder="Donner une déscription..." [(ngModel)]="description"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-ajouter" (click)="ajouter()">Ajouter</button>
+            <button type="button" class="btn btn-annuler" data-bs-dismiss="modal">Annuler</button>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- Fin modal ajouter un contact -->
+
+<!-- Modal modifier un contact -->
+<div class="modal fade" id="modalModifierContact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier le contact</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="mb-4">
+                  <label for="inputName" class="form-label fw-bold">Nom  <span class="champObligatoire">*</span></label>
+                  <input type="text" name="nom" class="form-control" id="inputName" placeholder="Votre nom..." [(ngModel)]="nom">
+                </div>
+        
+                <div class="mb-4">
+                  <label for="inputSurname" class="form-label fw-bold">Prénom <span class="champObligatoire">*</span></label>
+                  <input type="text" name="prenom" class="form-control" id="inputSurname" placeholder="Votre prénom..." [(ngModel)]="prenom">
+                </div>
+        
+                <div class="mb-4">
+                  <label for="inputEmail" class="form-label fw-bold">Adresse email <span class="champObligatoire">*</span></label>
+                  <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Votre adresse email..." [(ngModel)]="email">
+                </div>
+        
+                <div class="mb-4">
+                    <label for="inputPhone" class="form-label fw-bold">Téléphone <span class="champObligatoire">*</span></label>
+                    <input type="tel" name="number" class="form-control" id="inputPhone" placeholder="Votre numéro de téléphone..." [(ngModel)]="telephone">
+                </div>
+        
+                <div class="mb-4">
+                    <label for="inputPhotoUrl" class="form-label fw-bold">Adresse de l'image <span class="champObligatoire">*</span></label>
+                    <input type="text" name="photoURL" class="form-control" id="inputPhotoUrl" placeholder="L'adresse valide de l'image..." [(ngModel)]="photoURL">
+                </div>
+                <!-- <div class="mb-4">
+                  <label for="formFile" class="form-label fw-bold">Choisir une image <span class="champObligatoire">*</span></label>
+                  <input class="form-control" type="file" id="formFile" name="imageFile" accept="image/*" (change)="uploadFile($event)">
+                </div> -->
+
+                <div class="mb-4">
+                    <label for="exampleFormControlTextarea1" class="form-label fw-bold">Description  <span class="champObligatoire">*</span></label>
+                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" placeholder="Donner une déscription..." [(ngModel)]="description"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-ajouter" (click)="modifier()">Confirmer</button>
+            <button type="button" class="btn btn-annuler" data-bs-dismiss="modal">Annuler</button>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- Fin modal modifier un contact -->

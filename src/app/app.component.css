@@ -1,0 +1,32 @@
+.header-nav{
+    background-color: white;
+    box-shadow: 5px 5px 5px #4aa3a2;
+    height: 130px;
+}
+
+.espace {
+    height: 170px;
+    width: 100%;
+}
+.img-logo {
+    width: 130px;
+    height: 100px;
+}
+
+.item-li a{
+    color: black;
+    font-weight: bold;
+    font-size: 25px;
+}
+.item-li a:hover{
+    background-color: #4aa3a2;
+    color: #F9968B ;
+    border-radius: 10px;
+}
+.navbar-toggler{
+    background-color: #F9968B;
+    color: white;
+}
+.navbar-toggler-icon{
+    font-size: 25px;
+}
